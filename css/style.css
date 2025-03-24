@@ -1,0 +1,242 @@
+body {
+    position: relative;
+}
+
+.search {
+    background: url(../img/mainPhoto.jpg) no-repeat 50% / cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search__wrapper {
+    text-align: center;
+}
+
+.search__title {
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.search__subtitle {
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 40px;
+}
+
+.search__form input {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10.96px;
+    background: rgb(255, 255, 255);
+    color: rgb(174, 174, 174);
+    font-family: BC Novatica TXT;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 18px;
+    width: 395px;
+    height: 55px;
+    padding-left: 15px;
+}
+
+.container {
+    width: 310px;
+    margin: 0 auto;
+} 
+
+.information {
+    background: rgb(33, 33, 33);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.information__title {
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.information .search__form input {
+    border: 0.75px solid rgb(255, 255, 255);
+    background: rgb(33, 33, 33);
+    border-radius: 4px;
+    width: 150px;
+    height: 30px;
+    margin: 0 auto;  
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+#camera-info {
+    border-radius: 6.17px;
+    background: rgb(211, 211, 211);
+    padding-top: 15px;
+    margin-top: 25px;
+    padding-bottom: 35px;
+}
+
+.camera-card {
+    width: 236px;
+    margin: 0 auto; 
+}
+
+.camera__name, .camera__number {
+    color: rgb(0, 0, 0);
+    font-family: BC Novatica TXT;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.camera__number {
+    font-size: 10px;
+}
+
+.camera__img {
+    margin-top: 15px;
+}
+
+.camera__year {
+    color: rgb(0, 0, 0);
+    font-family: BC Novatica TXT;
+    font-size: 9px;
+    font-weight: 500;
+    margin-top: 17px;
+}
+
+.camera__info {
+    border-radius: 4px;
+    background: rgb(33, 33, 33);
+    padding-top: 14px;
+    padding-left: 16px;
+    padding-bottom: 10px;
+    position: relative;
+    text-align-last: left;
+    margin-top: 15px;
+}
+
+.camera__info-circle {
+    border-radius: 100%;
+    background: rgb(255, 255, 255);
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+}
+
+.camera__info-btn {
+    padding: 0 8px;
+    height: 21px;    
+    border: 0.9px solid rgb(255, 255, 255);
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 7px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    bottom: 13px;
+    right: 20px;
+}
+
+.camera__info-year, .camera__info-place {
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.camera__info-title {
+    color: rgb(255, 255, 255);
+    font-family: BC Novatica TXT;
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.camera__info-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 28px;
+}
+
+#service-info {
+    margin-top: 40px;
+    position: relative;
+    background: url(../img/service.png) no-repeat 50% / cover;
+}
+
+.divider {
+    width: 3px;
+    height: 40px;
+    position: absolute;
+    top: -40px;
+    background: rgb(33, 33, 33);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.camera__wrapper {
+    width: 285px;
+    margin: 0 auto;
+}
+
+.camera__service {
+    border-radius: 4px;
+    background: rgb(255, 255, 255); 
+    margin-top: 33px;
+    display: flex;
+}
+
+.camera__service:nth-child(2) {
+    margin-top: 8px;
+}
+
+.camera__service-title {
+    color: rgb(0, 0, 0);
+    font-family: BC Novatica TXT;
+    font-size: 8.5px;
+    font-weight: 500;
+}
+
+.camera__service-link {
+    color: rgb(0, 0, 0);
+    font-family: BC Novatica TXT;
+    font-size: 6px;
+    font-weight: 500;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+}
+
+.camera__service-block {
+    padding-top: 20px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.second-block{
+    padding-top: 32px;
+}
+
+.camera__img-wrapper {
+    position: relative;
+}
+
+.camera__service-logo {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+

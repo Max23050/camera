@@ -1,0 +1,171 @@
+<?php
+$conn = new mysqli("localhost", "root", "", "camera_db");
+
+if ($conn->connect_error) {
+    die("Error: " . $conn->connect_error);
+}
+
+$camera_info = ""; 
+$image_html = ""; // Переменная для фото модели
+
+if (isset($_POST["search"])) {
+    $serial_number = $_POST["serial_number"];
+
+    // Запрос на поиск камеры и её фото
+    $sql = "SELECT c.model, c.production_date, c.image_file, ci.service_date, ci.pdf_file
+            FROM cameras c
+            LEFT JOIN camera_info ci ON ci.serial_number = ?
+            WHERE c.serial_start <= ? AND c.serial_end >= ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iii", $serial_number, $serial_number, $serial_number);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $camera_info = "Model: " . $row["model"] . "<br>Date: " . $row["production_date"] . "<br>";
+
+        // Вывод фото модели (если загружено)
+        if (!empty($row["image_file"])) {
+            $image_html = "<img src='" . $row["image_file"] . "' alt='Camera Image' width='300'><br>";
+        }
+
+        // Проверяем, есть ли запись о сервисе
+        if (!empty($row["service_date"])) {
+            $camera_info .= "Service Date: " . $row["service_date"] . "<br>";
+
+            // Если есть PDF, добавляем ссылку
+            if (!empty($row["pdf_file"])) {
+                $camera_info .= "<a href='" . $row["pdf_file"] . "' target='_blank'>Open PDF</a><br>";
+            }
+        } else {
+            $camera_info .= "No service history found.<br>";
+        }
+    } else {
+        $camera_info = "Not found";
+    }
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-reboot.min.css" integrity="sha512-ZHQv/ue+hZQ+Jd+JKhxic17TUraZ9UwS6G7RcwSrQEE9j/m/AGRwj1OmYrkP43H0B/Wf0pg3hfbHCMAS6SGHOg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <section class="search">
+        <div class="search__wrapper">
+            <div class="search__title">
+                Leica History M database
+            </div>
+            <div class="search__subtitle">
+                Search by the serial number:
+            </div>
+            <form method="POST" class="search__form">
+                <input type="number" name="serial_number" placeholder="Find your Leica M" required>
+                <button type="submit" name="search">Find</button>
+            </form>
+    </form>
+        </div>
+    </section>
+
+    <section class="information">
+        <div class="container">
+            <div class="information__title">
+                Leica History M database
+            </div>
+            <form method="POST" class="search__form">
+                <input type="number" name="serial_number" placeholder="Find your Leica M" required>
+                <button type="submit" name="search">Find</button>
+            </form>
+            <div id="camera-info">
+                <div class="camera-card">
+                    <div class="camera__name">Leica M2</div>
+                    <div class="camera__number">sn. 896757889</div>
+                    <img src="img/cameraExample.jpg" alt="camera" class="camera__img">
+                    <div class="camera__year">
+                        This camera is over 75 years old
+                    </div>
+                    <div class="camera__info">
+                        <div class="camera__info-year">
+                            14. 11. 1968
+                        </div>
+                        <div class="camera__info-title">
+                            Leica M2 made
+                        </div>
+                        <div class="camera__info-wrapper">
+                            <div class="camera__info-circle"></div>
+                            <div class="camera__info-place">Wetzlar, Germany</div>
+                        </div>
+                        <div class="camera__info-btn">
+                            more about M2
+                        </div>
+                    </div>
+                    <div class="camera__info" id="service-info">
+                        <div class="divider"></div>
+                        <div class="camera__info-year">
+                            14. 11. 2025
+                        </div>
+                        <div class="camera__info-title">
+                            Serviced by Kamera
+                        </div>
+                        <div class="camera__info-wrapper">
+                            <div class="camera__info-circle"></div>
+                            <div class="camera__info-place">Prague, Czechia</div>
+                        </div>
+                        <div class="camera__info-btn">
+                            view service protocol
+                        </div>
+                    </div>
+                </div>
+                <div class="camera__wrapper">
+                    <div class="camera__service">
+                        <div class="camera__img-wrapper">
+                            <img src="img/cameraService.jpg" alt="service" class="camera__service-img">
+                            <img src="img/logo.svg" alt="logo" class="camera__service-logo">
+                        </div>
+                        <div class="camera__service-block">
+                            <div class="camera__service-title">
+                                Does your M need <br>
+                                service? Visit best rated <br>
+                                service wordwide. 
+                            </div>
+                            <div class="camera__service-stars">
+                                <img src="img/stars.svg" alt="stars">
+                            </div>
+                            <div class="camera__service-link">Discover</div>
+                        </div>
+                    </div>
+                    <div class="camera__service">
+                        <div class="camera__img-wrapper">
+                            <img src="img/perfectLeica.jpg" alt="service" class="camera__service-img">
+                            <img src="img/logo.svg" alt="logo" class="camera__service-logo">
+                        </div>
+                        <div class="camera__service-block second-block">
+                            <div class="camera__service-title">
+                                Create your own <br>
+                                Perfect Leica!
+                            </div>
+                            <div class="camera__service-stars"></div>
+                            <div class="camera__service-link">Discover</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--    
+    <h3>Result:</h3>
+    <?php echo $image_html; ?>
+    <p><?php echo $camera_info; ?></p> -->
+
+</body>
+</html>
