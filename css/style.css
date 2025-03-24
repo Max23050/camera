@@ -304,4 +304,12 @@ body {
         font-size: 12px;
         line-height: 14px;
     }
+
+    .camera__service-stars {
+        margin-top: 10px;
+    }
+
+    .search {
+        display: none;
+    }
 }
